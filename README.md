@@ -303,13 +303,11 @@ Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más det
 
 ---
 
-## 👥 Autores
+## 👥 Autor
 
-**David** - *Desarrollo Principal* - [Tu GitHub](https://github.com/tu-usuario)
+**David Minango** - *Desarrollo Principal* - [Tu GitHub](https://github.com/pdavicho)
 
-**Museo y Centro Cultural Rumiñahui** - *Contenido y Diseño*
-
-**Universitario Rumiñahui** - *Institución Patrocinadora*
+**Universitario Rumiñahui** 
 
 ---
 
@@ -328,7 +326,7 @@ Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más det
 
 **Sitio Web**: [museo-cultural.vercel.app](https://tu-url.vercel.app)
 
-**Email**: contacto@museorumiñahui.edu.ec
+**Email**: pablodavid218@gmail.com
 
 ---
 
