@@ -1,32 +1,58 @@
 /* src/components/AvatarMenu.css */
 .avatar-menu-container {
   min-height: 100vh;
-  height: 100%;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  background-attachment: fixed;
+  background: linear-gradient(135deg, #2d1b69 0%, #1a0b3d 100%);
   max-width: 600px;
   margin: 0 auto;
-  overflow-x: hidden;
+  position: relative;
 }
 
 .avatar-menu-header {
   text-align: center;
-  padding: 20px 15px;
+  padding: 25px 15px 20px;
   color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-logo {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 .avatar-menu-header h1 {
-  font-size: 24px;
-  margin-bottom: 8px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  font-size: 22px;
+  margin-bottom: 5px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   line-height: 1.3;
+  background: linear-gradient(135deg, #ffa500 0%, #ff6b9d 50%, #00d9ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
 }
 
 .avatar-menu-header p {
-  font-size: 16px;
-  opacity: 0.9;
+  font-size: 15px;
+  opacity: 0.95;
+  color: #00d9ff;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .avatar-menu-content {
@@ -37,10 +63,10 @@
 
 .avatar-menu-content h2 {
   text-align: center;
-  color: white;
-  font-size: 22px;
+  color: #ffa500;
+  font-size: 20px;
   margin-bottom: 20px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .avatars-grid {
@@ -56,10 +82,16 @@
   overflow: hidden;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
   aspect-ratio: 3/4;
   display: flex;
   flex-direction: column;
+  border: 2px solid transparent;
+}
+
+.avatar-card:hover {
+  border-color: #00d9ff;
+  box-shadow: 0 8px 25px rgba(0, 217, 255, 0.5);
 }
 
 .avatar-card:active {
@@ -69,7 +101,7 @@
 .avatar-image-container {
   flex: 1;
   overflow: hidden;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  background: linear-gradient(135deg, #f5f7fa 0%, #e8eef5 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -92,7 +124,7 @@
 
 .avatar-info h3 {
   font-size: 16px;
-  color: #333;
+  color: #2d1b69;
   margin-bottom: 4px;
   font-weight: 600;
 }
@@ -118,15 +150,24 @@
 .avatar-menu-footer {
   text-align: center;
   padding: 15px;
-  color: white;
-  opacity: 0.8;
+  color: #00d9ff;
+  opacity: 0.9;
   font-size: 13px;
 }
 
 /* Solo para pantallas muy pequeñas */
 @media (max-width: 380px) {
+  .header-logo {
+    width: 60px;
+    height: 60px;
+  }
+
   .avatar-menu-header h1 {
-    font-size: 20px;
+    font-size: 18px;
+  }
+
+  .avatar-menu-header p {
+    font-size: 13px;
   }
 
   .avatars-grid {

@@ -6,6 +6,7 @@ function AvatarMenu({ avatars, onAvatarSelect, onViewGallery }) {
   return (
     <div className="avatar-menu-container">
       <div className="avatar-menu-header">
+        <img src="/logo.png" alt="Logo Museo" className="header-logo" />
         <h1>Museo y Centro Cultural Rumiñahui</h1>
         <p>Experiencia AR Interactiva</p>
       </div>
@@ -43,7 +44,7 @@ function AvatarMenu({ avatars, onAvatarSelect, onViewGallery }) {
       </div>
 
       <div className="avatar-menu-footer">
-        <p>© 2026 Museo Cultural Rumiñahui</p>
+        <p>© 2026 Instituto Universitario Rumiñahui | PDMN</p>
       </div>
     </div>
   );

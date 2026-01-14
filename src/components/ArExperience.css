@@ -1,14 +1,12 @@
 /* src/components/ArExperience.css */
 .ar-experience-container {
   min-height: 100vh;
-  height: 100%;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  background-attachment: fixed;
+  background: linear-gradient(135deg, #2d1b69 0%, #1a0b3d 100%);
   max-width: 600px;
   margin: 0 auto;
-  overflow-x: hidden;
+  position: relative;
 }
 
 .ar-header {
@@ -16,17 +14,19 @@
   justify-content: space-between;
   align-items: center;
   padding: 12px 15px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(0, 217, 255, 0.1);
   backdrop-filter: blur(10px);
   gap: 10px;
+  border-bottom: 2px solid rgba(0, 217, 255, 0.3);
 }
 
 .ar-header h2 {
-  color: white;
+  color: #ffa500;
   font-size: 18px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   flex: 1;
   text-align: center;
+  font-weight: 700;
 }
 
 .back-btn,
@@ -43,8 +43,8 @@
   border-radius: 0;
   overflow: hidden;
   box-shadow: none;
-  min-height: 500px;
-  max-height: 500px;
+  min-height: 450px;
+  max-height: 450px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -53,8 +53,8 @@
 model-viewer {
   width: 100%;
   height: 100%;
-  min-height: 500px;
-  max-height: 500px;
+  min-height: 450px;
+  max-height: 450px;
 }
 
 .ar-button {
@@ -63,14 +63,14 @@ model-viewer {
   left: 50%;
   transform: translateX(-50%);
   padding: 14px 28px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #ff6b9d 0%, #ffa500 100%);
   color: white;
   border: none;
   border-radius: 25px;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 15px rgba(255, 107, 157, 0.5);
   z-index: 10;
   white-space: nowrap;
 }
@@ -86,22 +86,22 @@ model-viewer {
 }
 
 .ar-instructions {
-  color: white;
+  color: #00d9ff;
   font-size: 14px;
-  margin-bottom: 15px;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-  line-height: 1.4;
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  line-height: 1.6;
+  white-space: pre-line;
 }
 
-.capture-btn {
+.upload-btn {
   width: 100%;
-  max-width: 100%;
-  padding: 14px;
-  font-size: 16px;
+  padding: 16px;
+  font-size: 18px;
   margin-bottom: 12px;
 }
 
-.capture-btn:disabled {
+.upload-btn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }
@@ -110,14 +110,16 @@ model-viewer {
   color: white;
   font-size: 13px;
   padding: 10px;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(0, 217, 255, 0.2);
   border-radius: 8px;
   backdrop-filter: blur(10px);
   margin-top: 10px;
+  border: 1px solid rgba(0, 217, 255, 0.3);
 }
 
 .status-message.error {
   background: rgba(255, 71, 87, 0.3);
+  border-color: rgba(255, 71, 87, 0.5);
 }
 
 /* Modal de éxito */
@@ -127,7 +129,7 @@ model-viewer {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.85);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -136,13 +138,14 @@ model-viewer {
 }
 
 .modal-content {
-  background: white;
+  background: linear-gradient(135deg, #2d1b69 0%, #1a0b3d 100%);
   padding: 30px 20px;
   border-radius: 15px;
   text-align: center;
   max-width: 350px;
   width: 100%;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 10px 40px rgba(255, 107, 157, 0.5);
+  border: 2px solid #00d9ff;
 }
 
 .modal-icon {
@@ -152,13 +155,13 @@ model-viewer {
 
 .modal-content h3 {
   font-size: 22px;
-  color: #333;
+  color: #ffa500;
   margin-bottom: 12px;
 }
 
 .modal-content p {
   font-size: 14px;
-  color: #666;
+  color: #00d9ff;
   margin-bottom: 25px;
 }
 
@@ -170,59 +173,6 @@ model-viewer {
 
 .modal-buttons .btn {
   width: 100%;
-}
-
-/* Agregar al final de src/components/ArExperience.css, antes de @media */
-
-.button-group {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-bottom: 15px;
-}
-
-.upload-btn {
-  width: 100%;
-  padding: 16px;
-  font-size: 18px;
-  margin-bottom: 12px;
-}
-
-.divider {
-  text-align: center;
-  position: relative;
-  margin: 8px 0;
-}
-
-.divider span {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  padding: 4px 16px;
-  border-radius: 20px;
-  color: white;
-  font-size: 12px;
-  font-weight: 600;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-}
-
-.help-text {
-  color: white;
-  font-size: 12px;
-  text-align: center;
-  opacity: 0.9;
-  margin-top: 10px;
-  line-height: 1.4;
-  background: rgba(255, 255, 255, 0.1);
-  padding: 10px;
-  border-radius: 8px;
-}
-
-.ar-instructions {
-  color: white;
-  font-size: 14px;
-  margin-bottom: 20px;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-  line-height: 1.6;
-  white-space: pre-line;
 }
 
 /* Para pantallas muy pequeñas */
@@ -239,10 +189,12 @@ model-viewer {
 
   .ar-viewer {
     min-height: 380px;
+    max-height: 380px;
   }
 
   model-viewer {
     min-height: 380px;
+    max-height: 380px;
   }
 
   .ar-button {

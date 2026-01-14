@@ -1,0 +1,100 @@
+/* src/components/AdminLogin.css */
+.admin-login-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 20px;
+}
+
+.admin-login-content {
+  background: linear-gradient(135deg, #2d1b69 0%, #1a0b3d 100%);
+  padding: 40px 30px;
+  border-radius: 15px;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 10px 40px rgba(255, 107, 157, 0.5);
+  border: 2px solid #00d9ff;
+  position: relative;
+}
+
+.admin-close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(255, 107, 157, 0.9);
+  color: white;
+  border: none;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  border: 2px solid #00d9ff;
+  transition: all 0.3s ease;
+}
+
+.admin-close-btn:hover {
+  background: rgba(255, 71, 87, 0.9);
+  transform: rotate(90deg);
+}
+
+.admin-login-content h3 {
+  color: #ffa500;
+  font-size: 24px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.admin-login-content p {
+  color: #00d9ff;
+  font-size: 14px;
+  margin-bottom: 25px;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.admin-password-input {
+  width: 100%;
+  padding: 15px;
+  border: 2px solid #00d9ff;
+  border-radius: 8px;
+  font-size: 16px;
+  margin-bottom: 10px;
+  background: rgba(255, 255, 255, 0.95);
+  color: #2d1b69;
+  font-weight: 600;
+}
+
+.admin-password-input:focus {
+  outline: none;
+  border-color: #ffa500;
+  box-shadow: 0 0 10px rgba(255, 165, 0, 0.5);
+}
+
+.admin-error {
+  color: #ff4757;
+  font-size: 14px;
+  margin-bottom: 15px;
+  text-align: center;
+  background: rgba(255, 71, 87, 0.2);
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.admin-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.admin-buttons .btn {
+  width: 100%;
+}

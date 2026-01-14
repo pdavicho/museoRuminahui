@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { db, storage } from '../firebase-config';
 import { collection, getDocs, deleteDoc, doc, query, orderBy } from 'firebase/firestore';
 import { ref, deleteObject } from 'firebase/storage';
+import AdminLogin from './AdminLogin';
 import './Gallery.css';
 
 function Gallery({ onBack }) {
@@ -10,6 +11,8 @@ function Gallery({ onBack }) {
   const [isLoading, setIsLoading] = useState(true);
   const [selectedPhoto, setSelectedPhoto] = useState(null);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [showAdminLogin, setShowAdminLogin] = useState(false);
 
   useEffect(() => {
     loadPhotos();
@@ -36,6 +39,12 @@ function Gallery({ onBack }) {
   };
 
   const handleDeletePhoto = async (photo) => {
+    if (!isAdmin) {
+      alert('Necesitas permisos de administrador para eliminar fotos');
+      setShowAdminLogin(true);
+      return;
+    }
+
     if (!window.confirm('¿Estás seguro de eliminar esta foto?')) {
       return;
     }
@@ -71,6 +80,16 @@ function Gallery({ onBack }) {
     document.body.removeChild(link);
   };
 
+  const handleAdminLogin = () => {
+    setIsAdmin(true);
+    alert('✅ Sesión de administrador iniciada');
+  };
+
+  const handleAdminLogout = () => {
+    setIsAdmin(false);
+    alert('Sesión de administrador cerrada');
+  };
+
   return (
     <div className="gallery-container">
       <div className="gallery-header">
@@ -78,9 +97,26 @@ function Gallery({ onBack }) {
           ← Volver al Menú
         </button>
         <h2>Galería de Fotos</h2>
-        <button className="btn btn-secondary" onClick={loadPhotos}>
-          🔄 Actualizar
-        </button>
+        <div className="gallery-header-actions">
+          <button className="btn btn-secondary" onClick={loadPhotos}>
+            🔄 Actualizar
+          </button>
+          {!isAdmin ? (
+            <button 
+              className="btn btn-secondary admin-btn" 
+              onClick={() => setShowAdminLogin(true)}
+            >
+              🔐 Admin
+            </button>
+          ) : (
+            <button 
+              className="btn btn-danger admin-btn" 
+              onClick={handleAdminLogout}
+            >
+              🚪 Salir
+            </button>
+          )}
+        </div>
       </div>
 
       <div className="gallery-content">
@@ -140,16 +176,26 @@ function Gallery({ onBack }) {
               >
                 📥 Descargar
               </button>
-              <button 
-                className="btn btn-danger"
-                onClick={() => handleDeletePhoto(selectedPhoto)}
-                disabled={isDeleting}
-              >
-                {isDeleting ? '⏳ Eliminando...' : '🗑️ Eliminar'}
-              </button>
+              {isAdmin && (
+                <button 
+                  className="btn btn-danger"
+                  onClick={() => handleDeletePhoto(selectedPhoto)}
+                  disabled={isDeleting}
+                >
+                  {isDeleting ? '⏳ Eliminando...' : '🗑️ Eliminar'}
+                </button>
+              )}
             </div>
           </div>
         </div>
+      )}
+
+      {/* Modal de login admin */}
+      {showAdminLogin && (
+        <AdminLogin 
+          onLoginSuccess={handleAdminLogin}
+          onClose={() => setShowAdminLogin(false)}
+        />
       )}
     </div>
   );
