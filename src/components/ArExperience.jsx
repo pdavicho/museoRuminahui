@@ -47,7 +47,7 @@ function ArExperience({ avatar, onBack, onViewGallery }) {
           ctx.drawImage(img, 0, 0);
           
           // Calcular tamaño del logo (18% del ancho de la imagen para que se vea más grande)
-          const logoWidth = img.width * 0.18;
+          const logoWidth = img.width * 0.24;
           const logoHeight = (logo.height / logo.width) * logoWidth;
           
           // Posición del logo (esquina inferior derecha con margen)
