@@ -229,7 +229,6 @@ function ArExperience({ avatar, onBack, onViewGallery }) {
           ref={fileInputRef}
           type="file"
           accept="image/*"
-          capture="environment"
           onChange={handleFileSelect}
           style={{ display: 'none' }}
         />
