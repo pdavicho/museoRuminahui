@@ -1,0 +1,139 @@
+/* src/components/AvatarMenu.css */
+.avatar-menu-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.avatar-menu-header {
+  text-align: center;
+  padding: 30px 20px;
+  color: white;
+}
+
+.avatar-menu-header h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.avatar-menu-header p {
+  font-size: 18px;
+  opacity: 0.9;
+}
+
+.avatar-menu-content {
+  flex: 1;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.avatar-menu-content h2 {
+  text-align: center;
+  color: white;
+  font-size: 28px;
+  margin-bottom: 30px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.avatars-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+  margin-bottom: 40px;
+}
+
+.avatar-card {
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.avatar-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+
+.avatar-image-container {
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar-info {
+  padding: 20px;
+  text-align: center;
+}
+
+.avatar-info h3 {
+  font-size: 22px;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.avatar-info p {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.4;
+}
+
+.gallery-btn {
+  display: block;
+  margin: 0 auto;
+  min-width: 250px;
+}
+
+.avatar-menu-footer {
+  text-align: center;
+  padding: 20px;
+  color: white;
+  opacity: 0.8;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .avatar-menu-header h1 {
+    font-size: 24px;
+  }
+
+  .avatar-menu-header p {
+    font-size: 16px;
+  }
+
+  .avatar-menu-content h2 {
+    font-size: 22px;
+  }
+
+  .avatars-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+  }
+
+  .avatar-image-container {
+    height: 200px;
+  }
+
+  .avatar-info h3 {
+    font-size: 18px;
+  }
+
+  .avatar-info p {
+    font-size: 13px;
+  }
+}
