@@ -305,7 +305,7 @@ Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más det
 
 ## 👥 Autor
 
-**David Minango** - *Desarrollo Principal* - [Tu GitHub](https://github.com/pdavicho)
+[Pablo David Minango Negrete](https://github.com/pdavicho) - *Desarrollo Principal* 
 
 **Universitario Rumiñahui** 
 
