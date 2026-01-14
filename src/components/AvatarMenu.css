@@ -1,11 +1,14 @@
 /* src/components/AvatarMenu.css */
 .avatar-menu-container {
   min-height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background-attachment: fixed;
   max-width: 600px;
   margin: 0 auto;
+  overflow-x: hidden;
 }
 
 .avatar-menu-header {
