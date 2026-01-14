@@ -11,6 +11,7 @@ function ArExperience({ avatar, onBack, onViewGallery }) {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [modelLoaded, setModelLoaded] = useState(false);
   const modelViewerRef = useRef(null);
+  const fileInputRef = useRef(null);
 
   useEffect(() => {
     const modelViewer = modelViewerRef.current;
@@ -27,34 +28,24 @@ function ArExperience({ avatar, onBack, onViewGallery }) {
     }
   }, []);
 
-  const capturePhoto = async () => {
+  const handleFileSelect = async (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    // Verificar que sea una imagen
+    if (!file.type.startsWith('image/')) {
+      alert('Por favor selecciona un archivo de imagen');
+      return;
+    }
+
     try {
       setIsLoading(true);
-      setMessage('Preparando captura...');
+      setMessage('Procesando imagen...');
 
-      const modelViewer = modelViewerRef.current;
-      if (!modelViewer) {
-        throw new Error('Model viewer no disponible');
-      }
+      console.log('Archivo seleccionado:', file.name, 'Tamaño:', file.size);
 
-      if (!modelLoaded) {
-        throw new Error('El modelo aún no ha cargado completamente');
-      }
-
-      console.log('Iniciando captura...');
-      setMessage('Capturando foto...');
-
-      // Capturar la imagen del model-viewer
-      const blob = await modelViewer.toBlob({ 
-        mimeType: 'image/jpeg',
-        qualityArgument: 0.92
-      });
-
-      if (!blob) {
-        throw new Error('No se pudo capturar la imagen');
-      }
-
-      console.log('Imagen capturada, tamaño:', blob.size);
+      // Convertir el archivo a blob
+      const blob = new Blob([file], { type: file.type });
 
       // Generar nombre único para la imagen
       const timestamp = Date.now();
@@ -72,7 +63,7 @@ function ArExperience({ avatar, onBack, onViewGallery }) {
 
       // Guardar en Firestore
       setMessage('Guardando en galería...');
-      const docRef = await addDoc(collection(db, 'photos'), {
+      await addDoc(collection(db, 'photos'), {
         avatarId: avatar.id,
         avatarName: avatar.name,
         imageUrl: downloadURL,
@@ -81,18 +72,25 @@ function ArExperience({ avatar, onBack, onViewGallery }) {
         createdAt: new Date().toISOString()
       });
 
-      console.log('Documento guardado en Firestore:', docRef.id);
+      console.log('Foto guardada exitosamente');
 
       setMessage('¡Foto guardada exitosamente!');
       setShowSuccessModal(true);
       setIsLoading(false);
 
+      // Limpiar el input
+      event.target.value = '';
+
     } catch (error) {
-      console.error('Error detallado al capturar foto:', error);
+      console.error('Error al procesar archivo:', error);
       setMessage(`Error: ${error.message}`);
       setIsLoading(false);
       setTimeout(() => setMessage(''), 5000);
     }
+  };
+
+  const triggerFileInput = () => {
+    fileInputRef.current?.click();
   };
 
   const closeModal = () => {
@@ -131,7 +129,7 @@ function ArExperience({ avatar, onBack, onViewGallery }) {
             slot="ar-button" 
             className="ar-button"
           >
-            📱 Ver en AR (Solo Móvil)
+            📱 Ver en AR
           </button>
         </model-viewer>
       </div>
@@ -139,17 +137,26 @@ function ArExperience({ avatar, onBack, onViewGallery }) {
       <div className="ar-controls">
         <p className="ar-instructions">
           {modelLoaded 
-            ? '✅ Modelo cargado. En móvil puedes usar AR, o captura una foto del modelo 3D' 
+            ? '✅ 1. Toca "Ver en AR" para ver el avatar en tu espacio\n2. Toma una foto con tu cámara\n3. Sube la foto con el botón de abajo' 
             : '⏳ Cargando modelo 3D...'}
         </p>
-        
+
         <button 
-          className="btn btn-primary capture-btn"
-          onClick={capturePhoto}
-          disabled={isLoading || !modelLoaded}
+          className="btn btn-primary upload-btn"
+          onClick={triggerFileInput}
+          disabled={isLoading}
         >
-          {isLoading ? '⏳ Procesando...' : '📸 Capturar Foto'}
+          {isLoading ? '⏳ Subiendo...' : '📤 Subir Foto con Avatar'}
         </button>
+        
+        <input
+          ref={fileInputRef}
+          type="file"
+          accept="image/*"
+          capture="environment"
+          onChange={handleFileSelect}
+          style={{ display: 'none' }}
+        />
 
         {message && !showSuccessModal && (
           <p className={`status-message ${message.includes('Error') ? 'error' : ''}`}>
