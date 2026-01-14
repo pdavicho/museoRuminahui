@@ -29,76 +29,65 @@ function ArExperience({ avatar, onBack, onViewGallery }) {
   }, []);
 
   const addWatermark = async (imageBlob) => {
-    return new Promise((resolve, reject) => {
-      const img = new Image();
-      const logo = new Image();
-      
-      img.onload = () => {
-        logo.onload = () => {
-          try {
-            // Crear canvas con las dimensiones de la imagen
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-            
-            canvas.width = img.width;
-            canvas.height = img.height;
-            
-            // Dibujar la imagen original
-            ctx.drawImage(img, 0, 0);
-            
-            // Calcular tamaño del logo (10% del ancho de la imagen)
-            const logoWidth = img.width * 0.12;
-            const logoHeight = (logo.height / logo.width) * logoWidth;
-            
-            // Posición del logo (esquina inferior derecha con margen)
-            const margin = 20;
-            const x = canvas.width - logoWidth - margin;
-            const y = canvas.height - logoHeight - margin;
-            
-            // Agregar fondo semi-transparente detrás del logo
-            ctx.fillStyle = 'rgba(45, 27, 105, 0.7)';
-            ctx.roundRect(x - 10, y - 10, logoWidth + 20, logoHeight + 20, 10);
-            ctx.fill();
-            
-            // Dibujar el logo
-            ctx.drawImage(logo, x, y, logoWidth, logoHeight);
-            
-            // Agregar texto debajo del logo
-            const fontSize = Math.max(12, img.width * 0.02);
-            ctx.font = `bold ${fontSize}px Arial`;
-            ctx.fillStyle = '#ffa500';
-            ctx.textAlign = 'center';
-            ctx.fillText('Museo Cultural Rumiñahui | PDMN', x + logoWidth / 2, y + logoHeight + 25);
-            
-            // Convertir canvas a blob
-            canvas.toBlob((blob) => {
-              if (blob) {
-                resolve(blob);
-              } else {
-                reject(new Error('No se pudo crear el blob con marca de agua'));
-              }
-            }, 'image/jpeg', 0.95);
-            
-          } catch (error) {
-            reject(error);
-          }
-        };
-        
-        logo.onerror = () => {
-          console.warn('No se pudo cargar el logo, subiendo imagen sin marca de agua');
-          resolve(imageBlob);
-        };
-        
-        logo.src = '/ru.png';
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    const logo = new Image();
+    
+    img.onload = () => {
+      logo.onload = () => {
+        try {
+          // Crear canvas con las dimensiones de la imagen
+          const canvas = document.createElement('canvas');
+          const ctx = canvas.getContext('2d');
+          
+          canvas.width = img.width;
+          canvas.height = img.height;
+          
+          // Dibujar la imagen original
+          ctx.drawImage(img, 0, 0);
+          
+          // Calcular tamaño del logo (18% del ancho de la imagen para que se vea más grande)
+          const logoWidth = img.width * 0.18;
+          const logoHeight = (logo.height / logo.width) * logoWidth;
+          
+          // Posición del logo (esquina inferior derecha con margen)
+          const margin = 15;
+          const x = canvas.width - logoWidth - margin;
+          const y = canvas.height - logoHeight - margin;
+          
+          // Dibujar el logo directamente (sin fondo ni texto)
+          ctx.drawImage(logo, x, y, logoWidth, logoHeight);
+          
+          // Convertir canvas a blob
+          canvas.toBlob((blob) => {
+            if (blob) {
+              resolve(blob);
+            } else {
+              reject(new Error('No se pudo crear el blob con marca de agua'));
+            }
+          }, 'image/jpeg', 0.95);
+          
+        } catch (error) {
+          reject(error);
+        }
       };
       
-      img.onerror = () => {
-        reject(new Error('No se pudo cargar la imagen'));
+      logo.onerror = () => {
+        console.warn('No se pudo cargar el logo, subiendo imagen sin marca de agua');
+        resolve(imageBlob);
       };
       
-      img.src = URL.createObjectURL(imageBlob);
-    });
-  };
+      // Cambiar aquí el nombre del archivo si lo renombraste
+      logo.src = '/ru.png';
+    };
+    
+    img.onerror = () => {
+      reject(new Error('No se pudo cargar la imagen'));
+    };
+    
+    img.src = URL.createObjectURL(imageBlob);
+  });
+};
 
   const handleFileSelect = async (event) => {
     const file = event.target.files[0];
